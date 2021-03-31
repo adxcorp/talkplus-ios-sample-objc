@@ -109,13 +109,13 @@
 
 - (void)messageListWithLast:(TPMessage *)lastMessage {
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] getMessageList:self.channel lastMessage:lastMessage success:^(NSArray *tpMessageArray) {
+    [[TalkPlus sharedInstance] getMessageList:self.channel lastMessage:lastMessage success:^(NSArray<TPMessage *> *tpMessages) {
         if (lastMessage == nil) {
             weakSelf.messages = [NSMutableArray array];
         }
         
-        if (tpMessageArray.count > 0) {
-            [weakSelf.messages addObjectsFromArray:[tpMessageArray reverseObjectEnumerator].allObjects];
+        if (tpMessages.count > 0) {
+            [weakSelf.messages addObjectsFromArray:[tpMessages reverseObjectEnumerator].allObjects];
         }
         
         if (weakSelf.messages.count > 0) {
@@ -204,10 +204,10 @@
 }
 
 #pragma mark - TPChannelDelegate
-- (void)memberAdded:(TPChannel *)tpChannel users:(NSArray *)users {
+- (void)memberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
 }
 
-- (void)memberLeft:(TPChannel *)tpChannel users:(NSArray *)users {
+- (void)memberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
 }
 
 - (void)messageReceived:(TPChannel *)tpChannel message:(TPMessage *)tpMessage {
@@ -222,6 +222,12 @@
     if ([self.channel.getChannelId isEqualToString:tpChannel.getChannelId]) {
         self.channel = tpChannel;
     }
+}
+
+- (void)channelAdded:(TPChannel *)tpChannel {
+}
+
+- (void)channelRemoved:(TPChannel *)tpChannel {
 }
 
 #pragma mark - UITableViewDataSource

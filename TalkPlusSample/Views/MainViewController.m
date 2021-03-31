@@ -80,12 +80,12 @@
     [self.tableView.refreshControl endRefreshing];
    
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] getChannelList:lastChannel success:^(NSArray *tpChannelArray) {
+    [[TalkPlus sharedInstance] getChannelList:lastChannel success:^(NSArray<TPChannel *> *tpChannels) {
         if (lastChannel == nil) {
             [weakSelf.channels removeAllObjects];
         }
         
-        [weakSelf.channels addObjectsFromArray:tpChannelArray];
+        [weakSelf.channels addObjectsFromArray:tpChannels];
         [weakSelf.tableView reloadData];
         
     } failure:^(int errorCode, NSError *error) {

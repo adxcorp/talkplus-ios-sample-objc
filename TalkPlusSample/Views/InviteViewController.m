@@ -70,7 +70,7 @@
 
 - (void)createChannel {
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] createChannelWithUserIds:self.users channelId:nil reuseChannel:YES maxCount:20 hideMessagesBeforeJoin:NO channelType:self.channelType channelName:self.channelName invitationCode:self.invitationCode imageUrl:nil metaData:nil success:^(TPChannel *tpChannel) {
+    [[TalkPlus sharedInstance] createChannelWithUserIds:self.users channelId:nil reuseChannel:YES maxMemberCount:20 hideMessagesBeforeJoin:NO channelType:self.channelType channelName:self.channelName invitationCode:self.invitationCode imageUrl:nil metaData:nil success:^(TPChannel *tpChannel) {
         [weakSelf performSegueWithIdentifier:@"UnwindToMain" sender:nil];
         
     } failure:^(int errorCode, NSError *error) {

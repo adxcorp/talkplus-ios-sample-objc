@@ -25,7 +25,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"TalkPlus";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(channelAction:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_more"] style:UIBarButtonItemStylePlain target:self action:@selector(channelAction:)];
     
     [self.tableView.refreshControl addTarget:self action:@selector(reloadChannelList) forControlEvents:UIControlEventValueChanged];
     

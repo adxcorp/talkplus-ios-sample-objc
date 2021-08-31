@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AE4C19AC675BF7CC2445A1D0 /* Pods_TalkPlusSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */; };
+		CC61859E26DE0EC80069E066 /* PushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC61859D26DE0EC80069E066 /* PushManager.m */; };
+		CC6185A026DE150D0069E066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC61859F26DE150D0069E066 /* GoogleService-Info.plist */; };
 		CCFB7F8C25B6C19E0000D491 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7F8B25B6C19E0000D491 /* main.m */; };
 		CCFB801D25B6C5DF0000D491 /* MainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB800B25B6C5DF0000D491 /* MainCell.m */; };
 		CCFB801E25B6C5DF0000D491 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB800D25B6C5DF0000D491 /* LoginViewController.m */; };
@@ -27,10 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2CD4991ACBC9C9F28EF16C96 /* Pods_TalkPlusSampleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkPlusSampleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FADF52A10107A3050F52200 /* Pods-TalkPlusSampleSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSampleSwift.debug.xcconfig"; path = "Target Support Files/Pods-TalkPlusSampleSwift/Pods-TalkPlusSampleSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		533F2CC6C2A789E18767068B /* Pods-TalkPlusSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSample.debug.xcconfig"; path = "Target Support Files/Pods-TalkPlusSample/Pods-TalkPlusSample.debug.xcconfig"; sourceTree = "<group>"; };
 		C95F10BBAFB90F3026861501 /* Pods-TalkPlusSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSample.release.xcconfig"; path = "Target Support Files/Pods-TalkPlusSample/Pods-TalkPlusSample.release.xcconfig"; sourceTree = "<group>"; };
+		CC61859C26DE0EC80069E066 /* PushManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushManager.h; sourceTree = "<group>"; };
+		CC61859D26DE0EC80069E066 /* PushManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushManager.m; sourceTree = "<group>"; };
+		CC61859F26DE150D0069E066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC64EDCE26BBBFE0001D8852 /* TalkPlusSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TalkPlusSample.entitlements; sourceTree = "<group>"; };
 		CCFB7F7625B6C19D0000D491 /* TalkPlusSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkPlusSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFB7F8A25B6C19E0000D491 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCFB7F8B25B6C19E0000D491 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,7 +66,6 @@
 		CCFB80BE25B7F7EE0000D491 /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
 		CCFB80BF25B7F7EE0000D491 /* UIViewController+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
 		E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkPlusSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F64A4FCA230CD52C1C4C847D /* Pods-TalkPlusSampleSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSampleSwift.release.xcconfig"; path = "Target Support Files/Pods-TalkPlusSampleSwift/Pods-TalkPlusSampleSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +85,6 @@
 			children = (
 				533F2CC6C2A789E18767068B /* Pods-TalkPlusSample.debug.xcconfig */,
 				C95F10BBAFB90F3026861501 /* Pods-TalkPlusSample.release.xcconfig */,
-				4FADF52A10107A3050F52200 /* Pods-TalkPlusSampleSwift.debug.xcconfig */,
-				F64A4FCA230CD52C1C4C847D /* Pods-TalkPlusSampleSwift.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -92,9 +93,17 @@
 			isa = PBXGroup;
 			children = (
 				E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */,
-				2CD4991ACBC9C9F28EF16C96 /* Pods_TalkPlusSampleSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC61859B26DE0EB80069E066 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CC61859C26DE0EC80069E066 /* PushManager.h */,
+				CC61859D26DE0EC80069E066 /* PushManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		CCFB7F6D25B6C19D0000D491 = {
@@ -120,6 +129,7 @@
 			children = (
 				CCFB801625B6C5DF0000D491 /* Resources */,
 				CCFB801525B6C5DF0000D491 /* Extensions */,
+				CC61859B26DE0EB80069E066 /* Manager */,
 				CCFB800925B6C5DF0000D491 /* Views */,
 				CCFB801C25B6C5DF0000D491 /* AppDelegate.h */,
 				CCFB801A25B6C5DF0000D491 /* AppDelegate.m */,
@@ -131,6 +141,8 @@
 		CCFB7FB225B6C1BB0000D491 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				CC61859F26DE150D0069E066 /* GoogleService-Info.plist */,
+				CC64EDCE26BBBFE0001D8852 /* TalkPlusSample.entitlements */,
 				CCFB801B25B6C5DF0000D491 /* LaunchScreen.storyboard */,
 				CCFB801925B6C5DF0000D491 /* PrefixHeader.pch */,
 				CCFB7F8A25B6C19E0000D491 /* Info.plist */,
@@ -251,6 +263,7 @@
 			files = (
 				CCFB802325B6C5DF0000D491 /* Images.xcassets in Resources */,
 				CCFB802525B6C5DF0000D491 /* LaunchScreen.storyboard in Resources */,
+				CC6185A026DE150D0069E066 /* GoogleService-Info.plist in Resources */,
 				CCFB802225B6C5DF0000D491 /* Assets.xcassets in Resources */,
 				CCFB801F25B6C5DF0000D491 /* Main.storyboard in Resources */,
 			);
@@ -308,6 +321,7 @@
 				CCFB806F25B6C9BF0000D491 /* NSDate+Extension.m in Sources */,
 				CCFB808B25B7BFD30000D491 /* ChannelViewController.m in Sources */,
 				CCFB807925B6D0DD0000D491 /* InviteViewController.m in Sources */,
+				CC61859E26DE0EC80069E066 /* PushManager.m in Sources */,
 				CCFB80C025B7F7EE0000D491 /* UIViewController+Extension.m in Sources */,
 				CCFB801D25B6C5DF0000D491 /* MainCell.m in Sources */,
 				CCFB809025B7BFDD0000D491 /* MemberViewController.m in Sources */,
@@ -441,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TalkPlusSample/TalkPlusSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V6UAGM9A4;
 				GCC_PREFIX_HEADER = TalkPlusSample/PrefixHeader.pch;
@@ -461,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TalkPlusSample/TalkPlusSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V6UAGM9A4;
 				GCC_PREFIX_HEADER = TalkPlusSample/PrefixHeader.pch;

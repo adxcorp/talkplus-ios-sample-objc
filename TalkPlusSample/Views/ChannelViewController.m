@@ -218,16 +218,30 @@
     }
 }
 
+- (void)channelAdded:(TPChannel *)tpChannel {
+}
+
 - (void)channelChanged:(TPChannel *)tpChannel {
     if ([self.channel.getChannelId isEqualToString:tpChannel.getChannelId]) {
         self.channel = tpChannel;
     }
 }
-
-- (void)channelAdded:(TPChannel *)tpChannel {
+- (void)channelRemoved:(TPChannel *)tpChannel {
 }
 
-- (void)channelRemoved:(TPChannel *)tpChannel {
+- (void)publicMemberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+}
+
+- (void)publicMemberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+}
+
+- (void)publicChannelAdded:(TPChannel *)tpChannel {
+}
+
+- (void)publicChannelChanged:(TPChannel *)tpChannel {
+}
+
+- (void)publicChannelRemoved:(TPChannel *)tpChannel {
 }
 
 #pragma mark - UITableViewDataSource

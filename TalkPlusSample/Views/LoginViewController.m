@@ -8,6 +8,7 @@
 #import "LoginViewController.h"
 
 #import "UIViewController+Extension.h"
+#import "PushManager.h"
 
 @interface LoginViewController ()
 
@@ -48,6 +49,8 @@
         __weak typeof(self) weakSelf = self;
         [[TalkPlus sharedInstance] loginWithAnonymous:userId username:userName profileImageUrl:nil metaData:nil
                                               success:^(TPUser *tpUser) {
+            [[PushManager sharedInstance] registerFCMToken];
+            
             [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"KeyUserID"];
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"KeyUserName"];
             [[NSUserDefaults standardUserDefaults] synchronize];

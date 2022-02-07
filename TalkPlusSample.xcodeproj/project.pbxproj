@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE4C19AC675BF7CC2445A1D0 /* Pods_TalkPlusSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */; };
+		68FF93F9823EC02342E22609 /* Pods_TalkPlusSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACDBE6DD5F705D254CBBF1D /* Pods_TalkPlusSample.framework */; };
+		CC57262527AD12A100B0DE61 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC57262427AD12A100B0DE61 /* ImagePickerManager.m */; };
 		CC61859E26DE0EC80069E066 /* PushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC61859D26DE0EC80069E066 /* PushManager.m */; };
-		CC6185A026DE150D0069E066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC61859F26DE150D0069E066 /* GoogleService-Info.plist */; };
 		CCFB7F8C25B6C19E0000D491 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7F8B25B6C19E0000D491 /* main.m */; };
 		CCFB801D25B6C5DF0000D491 /* MainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB800B25B6C5DF0000D491 /* MainCell.m */; };
 		CCFB801E25B6C5DF0000D491 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFB800D25B6C5DF0000D491 /* LoginViewController.m */; };
@@ -30,10 +30,12 @@
 
 /* Begin PBXFileReference section */
 		533F2CC6C2A789E18767068B /* Pods-TalkPlusSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSample.debug.xcconfig"; path = "Target Support Files/Pods-TalkPlusSample/Pods-TalkPlusSample.debug.xcconfig"; sourceTree = "<group>"; };
+		AACDBE6DD5F705D254CBBF1D /* Pods_TalkPlusSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkPlusSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95F10BBAFB90F3026861501 /* Pods-TalkPlusSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkPlusSample.release.xcconfig"; path = "Target Support Files/Pods-TalkPlusSample/Pods-TalkPlusSample.release.xcconfig"; sourceTree = "<group>"; };
+		CC57262327AD12A100B0DE61 /* ImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerManager.h; sourceTree = "<group>"; };
+		CC57262427AD12A100B0DE61 /* ImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManager.m; sourceTree = "<group>"; };
 		CC61859C26DE0EC80069E066 /* PushManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushManager.h; sourceTree = "<group>"; };
 		CC61859D26DE0EC80069E066 /* PushManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushManager.m; sourceTree = "<group>"; };
-		CC61859F26DE150D0069E066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC64EDCE26BBBFE0001D8852 /* TalkPlusSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TalkPlusSample.entitlements; sourceTree = "<group>"; };
 		CCFB7F7625B6C19D0000D491 /* TalkPlusSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkPlusSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFB7F8A25B6C19E0000D491 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,7 +67,6 @@
 		CCFB809E25B7CEC70000D491 /* ChannelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChannelCell.m; sourceTree = "<group>"; };
 		CCFB80BE25B7F7EE0000D491 /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
 		CCFB80BF25B7F7EE0000D491 /* UIViewController+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
-		E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkPlusSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE4C19AC675BF7CC2445A1D0 /* Pods_TalkPlusSample.framework in Frameworks */,
+				68FF93F9823EC02342E22609 /* Pods_TalkPlusSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +93,7 @@
 		296470F6C21A7C6BF5AC63B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E84431E8562FC99DFB36AC64 /* Pods_TalkPlusSample.framework */,
+				AACDBE6DD5F705D254CBBF1D /* Pods_TalkPlusSample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -100,6 +101,8 @@
 		CC61859B26DE0EB80069E066 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CC57262327AD12A100B0DE61 /* ImagePickerManager.h */,
+				CC57262427AD12A100B0DE61 /* ImagePickerManager.m */,
 				CC61859C26DE0EC80069E066 /* PushManager.h */,
 				CC61859D26DE0EC80069E066 /* PushManager.m */,
 			);
@@ -141,12 +144,11 @@
 		CCFB7FB225B6C1BB0000D491 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CC61859F26DE150D0069E066 /* GoogleService-Info.plist */,
-				CC64EDCE26BBBFE0001D8852 /* TalkPlusSample.entitlements */,
-				CCFB801B25B6C5DF0000D491 /* LaunchScreen.storyboard */,
-				CCFB801925B6C5DF0000D491 /* PrefixHeader.pch */,
 				CCFB7F8A25B6C19E0000D491 /* Info.plist */,
+				CCFB801B25B6C5DF0000D491 /* LaunchScreen.storyboard */,
 				CCFB7F8B25B6C19E0000D491 /* main.m */,
+				CCFB801925B6C5DF0000D491 /* PrefixHeader.pch */,
+				CC64EDCE26BBBFE0001D8852 /* TalkPlusSample.entitlements */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -214,7 +216,7 @@
 				CCFB7F7225B6C19D0000D491 /* Sources */,
 				CCFB7F7325B6C19D0000D491 /* Frameworks */,
 				CCFB7F7425B6C19D0000D491 /* Resources */,
-				1E46CA42231F3F12FAB6147E /* [CP] Embed Pods Frameworks */,
+				E9D24122CBCAF170FAAAD850 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,7 +265,6 @@
 			files = (
 				CCFB802325B6C5DF0000D491 /* Images.xcassets in Resources */,
 				CCFB802525B6C5DF0000D491 /* LaunchScreen.storyboard in Resources */,
-				CC6185A026DE150D0069E066 /* GoogleService-Info.plist in Resources */,
 				CCFB802225B6C5DF0000D491 /* Assets.xcassets in Resources */,
 				CCFB801F25B6C5DF0000D491 /* Main.storyboard in Resources */,
 			);
@@ -294,7 +295,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1E46CA42231F3F12FAB6147E /* [CP] Embed Pods Frameworks */ = {
+		E9D24122CBCAF170FAAAD850 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,6 +330,7 @@
 				CCFB807425B6D0860000D491 /* CreateViewController.m in Sources */,
 				CCFB809F25B7CEC70000D491 /* ChannelCell.m in Sources */,
 				CCFB7F8C25B6C19E0000D491 /* main.m in Sources */,
+				CC57262527AD12A100B0DE61 /* ImagePickerManager.m in Sources */,
 				CCFB801E25B6C5DF0000D491 /* LoginViewController.m in Sources */,
 				CCFB802025B6C5DF0000D491 /* MainViewController.m in Sources */,
 			);

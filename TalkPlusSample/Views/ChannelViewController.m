@@ -10,11 +10,13 @@
 
 #import "MemberViewController.h"
 
+#import "ImagePickerManager.h"
 #import "NSDate+Extension.h"
 
 @interface ChannelViewController () <TPChannelDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 @property (nonatomic, weak) IBOutlet UIButton *sendButton;
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
@@ -34,12 +36,14 @@
     
     self.userId = [[NSUserDefaults standardUserDefaults] stringForKey:@"KeyUserID"];
     
+    self.addButton.layer.borderWidth = 0.5;
+    self.addButton.layer.borderColor = [UIColor.grayColor colorWithAlphaComponent:0.5].CGColor;
     self.textView.layer.borderWidth = 0.5;
     self.textView.layer.borderColor = [UIColor.grayColor colorWithAlphaComponent:0.5].CGColor;
     self.textView.layer.cornerRadius = 16;
     self.textView.textContainer.lineFragmentPadding = 10;
     self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height / 2;
-
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     tapGesture.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGesture];
@@ -69,7 +73,7 @@
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     actionSheet.popoverPresentationController.barButtonItem = sender;
     actionSheet.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-
+    
     __weak typeof(self) weakSelf = self;
     NSArray<UIAlertAction *> *actions = @[
         [UIAlertAction actionWithTitle:@"Member Info" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -93,6 +97,48 @@
 - (IBAction)sendAction:(id)sender {
     [self sendMessage];
 }
+
+- (IBAction)addImageAction:(id)sender {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    actionSheet.popoverPresentationController.barButtonItem = sender;
+    actionSheet.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    
+    __weak typeof(self) weakSelf = self;
+    NSArray<UIAlertAction *> *actions = @[
+        [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [weakSelf showImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+        }],
+        [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [weakSelf showImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        }],
+        [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil] ];
+    
+    for (UIAlertAction *action in actions) {
+        [actionSheet addAction:action];
+    }
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)showImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType {
+    __weak typeof(self) weakSelf = self;
+
+    [[ImagePickerManager sharedInstance] showImagePickerWithViewController:self sourceType:sourceType completionHandler:^(UIImage *image, NSString *path) {
+        if (path) {
+            __typeof__(self) strongSelf = weakSelf;
+            NSString *text = strongSelf.textView.text;
+            [[TalkPlus sharedInstance] sendFileMessage:strongSelf.channel text:text type:TP_MESSAGE_TYPE_TEXT metaData:nil filePath:path success:^(TPMessage *tpMessage) {
+                if (tpMessage != nil) {
+                    [strongSelf addMessage:tpMessage];
+                    strongSelf.textView.text = nil;
+                }
+            } failure:^(int errorCode, NSError *error) {
+                NSLog(@"Error: %@", error.description);
+            }];
+        }
+    }];
+}
+
 
 #pragma mark - Message
 
@@ -131,12 +177,14 @@
     
     if (text.length > 0) {
         __weak typeof(self) weakSelf = self;
+        
         [[TalkPlus sharedInstance] sendMessage:self.channel text:text type:TP_MESSAGE_TYPE_TEXT metaData:nil success:^(TPMessage *tpMessage) {
             if (tpMessage != nil) {
                 [weakSelf addMessage:tpMessage];
                 weakSelf.textView.text = nil;
             }
         } failure:^(int errorCode, NSError *error) {
+            
         }];
     }
 }
@@ -144,7 +192,7 @@
 - (void)addMessage:(TPMessage *)message {
     [self.messages addObject:message];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0];
-   
+    
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.tableView reloadData];
@@ -205,12 +253,15 @@
 
 #pragma mark - TPChannelDelegate
 - (void)memberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+    NSLog(@"memberAdded");
 }
 
 - (void)memberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+    NSLog(@"memberLeft");
 }
 
 - (void)messageReceived:(TPChannel *)tpChannel message:(TPMessage *)tpMessage {
+    NSLog(@"messageReceived");
     if ([self.channel.getChannelId isEqualToString:tpChannel.getChannelId]) {
         self.channel = tpChannel;
         [self addMessage:tpMessage];
@@ -219,29 +270,37 @@
 }
 
 - (void)channelAdded:(TPChannel *)tpChannel {
+    NSLog(@"channelAdded");
 }
 
 - (void)channelChanged:(TPChannel *)tpChannel {
+    NSLog(@"channelChanged");
     if ([self.channel.getChannelId isEqualToString:tpChannel.getChannelId]) {
         self.channel = tpChannel;
     }
 }
 - (void)channelRemoved:(TPChannel *)tpChannel {
+    NSLog(@"channelRemoved");
 }
 
 - (void)publicMemberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+    NSLog(@"publicMemberAdded");
 }
 
 - (void)publicMemberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+    NSLog(@"publicMemberLeft");
 }
 
 - (void)publicChannelAdded:(TPChannel *)tpChannel {
+    NSLog(@"publicChannelAdded");
 }
 
 - (void)publicChannelChanged:(TPChannel *)tpChannel {
+    NSLog(@"publicChannelChanged");
 }
 
 - (void)publicChannelRemoved:(TPChannel *)tpChannel {
+    NSLog(@"publicChannelRemoved");
 }
 
 #pragma mark - UITableViewDataSource
@@ -274,6 +333,16 @@
         
     } else {
         cell.unreadCountLabel.text = nil;
+    }
+    
+    if (message.getFileUrl != nil && message.getFileUrl.length > 0) {
+        NSURL *url = [NSURL URLWithString:message.getFileUrl];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        cell.messageImageView.hidden = NO;
+        cell.messageImageView.image = [UIImage imageWithData:data];
+    } else {
+        cell.messageImageView.hidden = YES;
+        cell.messageImageView.image = nil;
     }
     
     return cell;

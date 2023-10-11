@@ -127,7 +127,14 @@
         if (path) {
             __typeof__(self) strongSelf = weakSelf;
             NSString *text = strongSelf.textView.text;
-            [[TalkPlus sharedInstance] sendFileMessage:strongSelf.channel text:text type:TP_MESSAGE_TYPE_TEXT metaData:nil filePath:path success:^(TPMessage *tpMessage) {
+            [[TalkPlus sharedInstance] sendFileMessage:strongSelf.channel 
+                                                  text:text
+                                                  type:TP_MESSAGE_TYPE_TEXT
+                                              mentions:@[]
+                                       parentMessageId:@""
+                                              metaData:nil
+                                              filePath:path
+                                               success:^(TPMessage *tpMessage) {
                 if (tpMessage != nil) {
                     [strongSelf addMessage:tpMessage];
                     strongSelf.textView.text = nil;
@@ -178,7 +185,13 @@
     if (text.length > 0) {
         __weak typeof(self) weakSelf = self;
         
-        [[TalkPlus sharedInstance] sendMessage:self.channel text:text type:TP_MESSAGE_TYPE_TEXT metaData:nil success:^(TPMessage *tpMessage) {
+        [[TalkPlus sharedInstance] sendMessage:self.channel 
+                                          text:text
+                                          type:TP_MESSAGE_TYPE_TEXT
+                                      mentions:@[]
+                               parentMessageId:@""
+                                      metaData:nil
+                                       success:^(TPMessage *tpMessage) {
             if (tpMessage != nil) {
                 [weakSelf addMessage:tpMessage];
                 weakSelf.textView.text = nil;
@@ -252,11 +265,11 @@
 }
 
 #pragma mark - TPChannelDelegate
-- (void)memberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+- (void)memberAdded:(TPChannel *)tpChannel users:(NSArray<TPMember *> *)users {
     NSLog(@"memberAdded");
 }
 
-- (void)memberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+- (void)memberLeft:(TPChannel *)tpChannel users:(NSArray<TPMember *> *)users {
     NSLog(@"memberLeft");
 }
 
@@ -269,6 +282,10 @@
     }
 }
 
+-(void)messageDeleted:(TPChannel *)tpChannel message:(TPMessage *)tpMessage {
+    NSLog(@"messageReceived");
+}
+
 - (void)channelAdded:(TPChannel *)tpChannel {
     NSLog(@"channelAdded");
 }
@@ -279,15 +296,16 @@
         self.channel = tpChannel;
     }
 }
+
 - (void)channelRemoved:(TPChannel *)tpChannel {
     NSLog(@"channelRemoved");
 }
 
-- (void)publicMemberAdded:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+- (void)publicMemberAdded:(TPChannel *)tpChannel users:(NSArray<TPMember *> *)users {
     NSLog(@"publicMemberAdded");
 }
 
-- (void)publicMemberLeft:(TPChannel *)tpChannel users:(NSArray<TPUser *> *)users {
+- (void)publicMemberLeft:(TPChannel *)tpChannel users:(NSArray<TPMember *> *)users {
     NSLog(@"publicMemberLeft");
 }
 

@@ -49,7 +49,7 @@
     [self.tableView addGestureRecognizer:tapGesture];
     
     [[TalkPlus sharedInstance] addChannelDelegate:self tag:@"TPAppDelegate"];
-    [self messageListWithLast:nil];
+    [self messageListWithLast:nil messagesArray:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,22 +160,34 @@
     }];
 }
 
-- (void)messageListWithLast:(TPMessage *)lastMessage {
+- (void)messageListWithLast:(TPMessage *)lastMessage messagesArray:(NSMutableArray<TPMessage *> *)messagesArray {
+    
+    if([messagesArray count] == 0) {
+        messagesArray = [NSMutableArray array];
+    }
+    
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] getMessageList:self.channel lastMessage:lastMessage success:^(NSArray<TPMessage *> *tpMessages) {
-        if (lastMessage == nil) {
-            weakSelf.messages = [NSMutableArray array];
+    [[TalkPlus sharedInstance] getMessages:self.channel
+                               lastMessage:lastMessage
+                                   success:^(NSArray<TPMessage *> *tpMessages, BOOL hasNext) {
+        __typeof__(self) strongSelf = weakSelf;
+        if(!strongSelf){ return; }
+        if ([tpMessages count]) {
+            [messagesArray addObjectsFromArray:tpMessages];
         }
-        
-        if (tpMessages.count > 0) {
-            [weakSelf.messages addObjectsFromArray:[tpMessages reverseObjectEnumerator].allObjects];
+        // 메시지 남아 있음 (재귀 호출)
+        if(hasNext){
+            [strongSelf messageListWithLast: [tpMessages lastObject] messagesArray:messagesArray];
+            return;
         }
-        
-        if (weakSelf.messages.count > 0) {
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-        }
+        // 메시지 더 이상 없음
+        strongSelf.messages = [NSMutableArray arrayWithArray:[[messagesArray reverseObjectEnumerator] allObjects]];
+        [strongSelf.tableView reloadData];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:strongSelf.messages.count - 1 inSection:0];
+        [strongSelf.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        return;
     } failure:^(int errorCode, NSError *error) {
+        NSLog(@"getMessages failed, %d", errorCode);
     }];
 }
 

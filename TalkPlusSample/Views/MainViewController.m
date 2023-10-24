@@ -78,19 +78,27 @@
 
 - (void)channelList:(TPChannel *)lastChannel {
     [self.tableView.refreshControl endRefreshing];
-   
+    
+    if (lastChannel == nil) {
+        [self.channels removeAllObjects];
+    }
+    
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] getChannelList:lastChannel success:^(NSArray<TPChannel *> *tpChannels) {
-        if (lastChannel == nil) {
-            [weakSelf.channels removeAllObjects];
+    [[TalkPlus sharedInstance] getChannels:lastChannel
+                                   success:^(NSArray<TPChannel *> *tpChannels, BOOL hasNext) {
+        __typeof__(self) strongSelf = weakSelf;
+        if(!strongSelf){ return; }
+        [strongSelf.channels addObjectsFromArray:tpChannels];
+        if(hasNext) {
+            [strongSelf channelList:tpChannels.lastObject];
+            return;
         }
-        
-        [weakSelf.channels addObjectsFromArray:tpChannels];
-        [weakSelf.tableView reloadData];
-        
+        [strongSelf.tableView reloadData];
     } failure:^(int errorCode, NSError *error) {
+        NSLog(@"getChannels failed, %d", errorCode);
     }];
 }
+
 
 - (void)reloadChannelList {
     [self channelList:nil];

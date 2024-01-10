@@ -47,10 +47,13 @@
     
     if (userId.length > 0 && userName.length > 0) {
         __weak typeof(self) weakSelf = self;
-        [[TalkPlus sharedInstance] loginWithAnonymous:userId username:userName profileImageUrl:nil metaData:nil
-                                              success:^(TPUser *tpUser) {
+        
+        TPLoginParams *params = [[TPLoginParams alloc] initWithLoginType:TPLoginAnonymous userId:userId];
+        params.userName = userName;
+        //params.translationLanguage = @"ko"
+        
+        [[TalkPlus sharedInstance] login:params success:^(TPUser *tpUser) {
             [[PushManager sharedInstance] registerFCMToken];
-            
             [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"KeyUserID"];
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"KeyUserName"];
             [[NSUserDefaults standardUserDefaults] synchronize];

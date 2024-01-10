@@ -127,14 +127,14 @@
         if (path) {
             __typeof__(self) strongSelf = weakSelf;
             NSString *text = strongSelf.textView.text;
-            [[TalkPlus sharedInstance] sendFileMessage:strongSelf.channel 
-                                                  text:text
-                                                  type:TP_MESSAGE_TYPE_TEXT
-                                              mentions:@[]
-                                       parentMessageId:@""
-                                              metaData:nil
-                                              filePath:path
-                                               success:^(TPMessage *tpMessage) {
+            
+            TPMessageSendParams * params = [[TPMessageSendParams alloc] initWithContentType:TPMessageContentFile
+                                                                                messageType:TPMessageText
+                                                                                    channel:self.channel];
+            params.textMessage = text;
+            params.filePath = path;
+            
+            [[TalkPlus sharedInstance] sendMessage:params success:^(TPMessage *tpMessage) {
                 if (tpMessage != nil) {
                     [strongSelf addMessage:tpMessage];
                     strongSelf.textView.text = nil;
@@ -167,9 +167,10 @@
     }
     
     __weak typeof(self) weakSelf = self;
-    [[TalkPlus sharedInstance] getMessages:self.channel
-                               lastMessage:lastMessage
-                                   success:^(NSArray<TPMessage *> *tpMessages, BOOL hasNext) {
+    TPMessageRetrievalParams *params = [[TPMessageRetrievalParams alloc] initWithChannel:self.channel];
+    params.lastMessage = lastMessage;
+    
+    [[TalkPlus sharedInstance] getMessages:params success:^(NSArray<TPMessage *> *tpMessages, BOOL hasNext) {
         __typeof__(self) strongSelf = weakSelf;
         if(!strongSelf){ return; }
         if ([tpMessages count]) {
@@ -196,14 +197,13 @@
     
     if (text.length > 0) {
         __weak typeof(self) weakSelf = self;
+    
+        TPMessageSendParams * params = [[TPMessageSendParams alloc] initWithContentType:TPMessageContentText
+                                                                            messageType:TPMessageText
+                                                                                channel:self.channel];
+        params.textMessage = self.textView.text;
         
-        [[TalkPlus sharedInstance] sendMessage:self.channel 
-                                          text:text
-                                          type:TP_MESSAGE_TYPE_TEXT
-                                      mentions:@[]
-                               parentMessageId:@""
-                                      metaData:nil
-                                       success:^(TPMessage *tpMessage) {
+        [[TalkPlus sharedInstance] sendMessage:params success:^(TPMessage *tpMessage) {
             if (tpMessage != nil) {
                 [weakSelf addMessage:tpMessage];
                 weakSelf.textView.text = nil;

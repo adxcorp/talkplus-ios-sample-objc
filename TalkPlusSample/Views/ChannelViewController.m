@@ -176,17 +176,19 @@
         if ([tpMessages count]) {
             [messagesArray addObjectsFromArray:tpMessages];
         }
-        // 메시지 남아 있음 (재귀 호출)
+        
+        /*
         if(hasNext){
             [strongSelf messageListWithLast: [tpMessages lastObject] messagesArray:messagesArray];
             return;
         }
-        // 메시지 더 이상 없음
+         */
+        
         strongSelf.messages = [NSMutableArray arrayWithArray:[[messagesArray reverseObjectEnumerator] allObjects]];
         [strongSelf.tableView reloadData];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:strongSelf.messages.count - 1 inSection:0];
         [strongSelf.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-        return;
+        
     } failure:^(int errorCode, NSError *error) {
         NSLog(@"getMessages failed, %d", errorCode);
     }];
